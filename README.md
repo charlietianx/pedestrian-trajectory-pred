@@ -10,3 +10,7 @@ Pedestrian trajectories prediction based on well-known datasets.
 # Datasets
 [ETH](https://data.vision.ee.ethz.ch/cvl/aess/dataset/)
 
+
+# Medium tutorial
+
+https://medium.com/@zhenqinghu/pedestrian-detection-on-eth-data-set-with-faster-r-cnn-19d0a906f1d3
