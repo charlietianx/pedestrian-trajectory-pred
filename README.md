@@ -1,6 +1,13 @@
 # pedestrian-trajectory-pred
 Pedestrian trajectories prediction based on well-known datasets.
+# Task
+- ## Trajectory prediction
+   - Data: Pedestrian trajectories
+   - Task: Prediction and unsupervised disentanglement
+   - Methods: InfoGAN/β-VAE
 # Papers
+[Social Ways: Learning Multi-Modal Distributions of Pedestrian Trajectories with GANs](https://arxiv.org/pdf/1904.09507.pdf)
+
 [Social LSTM: Human Trajectory Prediction in Crowded Spaces](https://ieeexplore.ieee.org/document/7780479)
 
 [Social GAN: Socially Acceptable Trajectories with Generative Adversarial Networks](https://arxiv.org/abs/1803.10892)
