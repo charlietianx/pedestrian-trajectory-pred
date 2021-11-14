@@ -5,4 +5,11 @@ pandas
 scipy
 seaborn
 torch
-# tqdm
+tqdm
+
+attrdict==2.0.0
+# numpy==1.14.5
+Pillow
+six==1.11.0
+# torch==0.4.0
+torchvision==0.2.1
