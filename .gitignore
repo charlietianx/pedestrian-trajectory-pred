@@ -136,6 +136,7 @@ dmypy.json
 *.nosync
 # output folder
 /out.nosync
+/output.nosync
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
