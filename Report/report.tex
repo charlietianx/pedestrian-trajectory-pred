@@ -39,16 +39,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-A generally good scheme for an abstract is the following:
-\begin{itemize}
- \item The problem?
- \item Our solution.
- \item Our solution in detail.
- \item So what?
-\end{itemize}
-(1-2 sentences each). 
-You don't need to provide an abstract during the first 3 phases, as you most likely will not have an answer to all items.
-It should be included in your phase 4 submission and the final document.
+  \input{sections/abstract}
 \end{abstract}
 
 
@@ -57,35 +48,11 @@ It should be included in your phase 4 submission and the final document.
 %% information and builds the first part of the formatted document.
 \maketitle
 \section*{Introduction}
-This template should provide you some hints on preparing the reports. 
-It is based on the template as provided by ACM\footnote{\url{https://www.acm.org/publications/proceedings-template}}.
-
-When you submit the report, indicate who is responsible for a particular phase (either add the name to the section heading of the phase or add a section indicating all the phase responsibles).
-
-Remove the irrelevant sections before submission.
-Your submission for phase 1 should only contain the first section (Problem Statement) and References (and potentially the abstract).
-Extend the document for the further phases, i.e. the submission for phase 2 should contain section 1 (Problem Statement) and 2 (Data Acquisition) and so on.
-
-Submit the pdf version of your report to all tutors via e-mail:
-\begin{itemize}
- \item sahib.julka@uni-passau.de
- \item julian.stier@uni-passau.de
- \item joerg.schloetterer@uni-passau.de
-\end{itemize}
+\input{sections/introduction}
 
 
 \section{Problem statement}
-Describe your problem statement clearly and short.
-Your algorithm will most likely not bring world-peace, but solve a particular problem.
-Narrow down your problem to be as specific as possible. 
-The more specific your problem, the better the chance to find a suitable solution. After a solution is found, the complexity can still be increased.
-For example ``the beer price is too high, we aim to reduce it'' is not a very precise problem statement. What is ``too high''? Which kind of beer? At which area/country? At which occasion (restaurant,supermarket,special event,etc.)? ...?
-
-Besides the problem statement, you should also indicate your approach on how you plan to solve it and how you plan to evaluate your solution in this section.
-
-Most likely, the problem you are going to address is not completely new, but at least a similar problem has previously been addressed by others already.
-Therefore, research how others solved this or similar problems, i.e. get familiar with the state of the art and related work.
-You may then apply (and adapt/extend) an existing solution to a similar problem to your problem at hand.
+\input{sections/problem-statement}
 
 \section{Data Acquisition \& Pre-Processing}
 Make sure to precisely describe what you did and why.
