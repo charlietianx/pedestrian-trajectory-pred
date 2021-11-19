@@ -1,10 +1,4 @@
 {
-  // "editor.fontFamily": "Fira Code",
-  "editor.wordWrap": "on",
-  "editor.fontFamily": "monospace",
-  "editor.fontLigatures": true,
-  "editor.minimap.enabled": false,
-  "editor.detectIndentation": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
 
@@ -52,4 +46,4 @@
     }
   ]
 }
-  
+
