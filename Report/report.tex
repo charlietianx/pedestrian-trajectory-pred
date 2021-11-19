@@ -30,8 +30,8 @@
 \email{wang52@ads.uni-passau.de}
 \affiliation{\institution{University of Passau}}
 
-\author{firstname lastname}
-\email{mail@example.org}
+\author{Zubair Ahmed}
+\email{ahmed08@ads.uni-passau.de}
 \affiliation{\institution{}}
 
 \renewcommand{\shortauthors}{team 4: Trajectory Prediction}
@@ -92,17 +92,18 @@ However, these approaches mentioned previously learn only the pattern of human m
 
 Even though these researches give various effective models that fulfill the prediction task and attempt to encompass hidden aspects that influence the trajectory, they have not disentangled these factors in the latent space. If we know the factors that affect pedestrians' trajectory and apply these factors in specific scenarios, we can obtain better performance of prediction on various distributed datasets and to mitigate the limitations of the observed data. Therefore, we decide to consider the hidden factors behind different datasets.
 
-In this study, we focus on what influencing human trajectories factors we can obtain and try to develop a model that can be controlled by these factors. We assume that different datasets have different static environments and so the data in a dataset share some specific common features. We consider three factors: obstacles (obstacles information such as the presence of static obstacles and the coordinates), maps (geometry and topology) and semantics (environment semantics such as no-go-zones, crosswalks, sidewalks, or traffic lights) in static environments, which are denoted by the survey~\cite{humanmotionsurvey}. We propose to develop a conditional generation model that is controlled by factor $c$ to have different static environments. We demonstrate that human movement is influenced by these three factors that we consider in a static environment. Also, with inputting different factors in static environments, our model can achieve better performance on different datasets.
+
+In this study, we focus on what factors we can obtain that influence human trajectories and try to develop a model that can be controlled by these factors. we assume that different datasets have different static environments and so the data in a dataset share some specific common features. We consider three factors: obstacles (obstacles information such as the presence of static obstacles and the coordinates), maps (geometry and topology), and semantics (environment semantics such as no-go-zones, crosswalks, sidewalks, or traffic lights) in static environments, which are denoted by the survey~\cite{humanmotionsurvey}. We propose to develop a controllable generation model that is controlled by factor $c$ to have different static environments. We demonstrate that human movement is influenced by these three factors that we consider in a static environment. Also, with inputting different factors in static environments, our model can achieve better performance on different datasets.
 
 \section{Problem statement}
 
 In this paper, our goal is to develop a controllable generative model to predict pedestrian trajectories.
 Consider the problem of predicting the future trajectory of each pedestrian. Let $(x_i^t, y_i^t)$ denote the position of the $i$ pedestrian at time $t$, and a sequence of coordinates  $[(x_i^{t}, y_i^{t}), (x_i^{t+1}, y_i^{t+1}), ..., (x_i^{t+n}, y_i^{t+n})]$ denote the trajectory of pedestrians from time $t$ to $t+n$.
 
-Given the observed trajectory of $n_{obs}$ steps $X_i^t = [(x_i^{t}, y_i^{t}), \\ (x_i^{t+1}, y_i^{t+1}), ..., (x_i^{t+n_{obs}}, y_i^{t+n_{obs}})]$, with certain condition $c$ and random variable $z$,  we want to fit a function to generate the prediction of trajectory for the next $n_{pred}$ steps $Y_i^t = [(x_i^{t+n_{obs}+1}, y_i^{t+n_{obs}+1}), \\ (x_i^{t+n_{obs}+ 2}, y_i^{t+n_{obs}+2}), ...,  (x_i^{t+n_{obs}+ n_{pred}}, y_i^{t+n_{obs}+n_{pred}})]$. That is
+Given the observed trajectory of $n_{obs}$ steps $X_i^t = [(x_i^{t}, y_i^{t}), \\ (x_i^{t+1}, y_i^{t+1}), ..., (x_i^{t+n_{obs}}, y_i^{t+n_{obs}})]$, with certain controllable factor $c$ and random variable $z$,  we want to fit a function to generate the prediction of trajectory for the next $n_{pred}$ steps $Y_i^t = [(x_i^{t+n_{obs}+1}, y_i^{t+n_{obs}+1}), \\ (x_i^{t+n_{obs}+ 2}, y_i^{t+n_{obs}+2}), ...,  (x_i^{t+n_{obs}+ n_{pred}}, y_i^{t+n_{obs}+n_{pred}})]$. That is
 $$ Y_i^t = f(X_i^t \vert c, z) $$
 
-The prediction $Y_i^t$ is conditioned on the vector $c$, where consist of $(c_1, c_2, c_3)$. So we can control the factors of obstacles, maps, and semantics respectively. These factors might vary over time.
+The prediction $Y_i^t$ is controllable by the vector $c$, where consist of $(c_1, c_2, c_3)$. So we can control the factors of obstacles, maps, and semantics respectively. These factors might vary over time.
 
 
 % Describe your problem statement clearly and short.
