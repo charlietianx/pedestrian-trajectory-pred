@@ -4,4 +4,4 @@ Consider the problem of predicting the future trajectory of each pedestrian. Let
 Given the observed trajectory of $n_{obs}$ steps $X_i^t = [(x_i^{t}, y_i^{t}), \\ (x_i^{t+1}, y_i^{t+1}), ..., (x_i^{t+n_{obs}}, y_i^{t+n_{obs}})]$, with certain controllable factor $c$ and random variable $z$,  we want to fit a function to generate the prediction of trajectory for the next $n_{pred}$ steps $Y_i^t = [(x_i^{t+n_{obs}+1}, y_i^{t+n_{obs}+1}), \\ (x_i^{t+n_{obs}+ 2}, y_i^{t+n_{obs}+2}), ...,  (x_i^{t+n_{obs}+ n_{pred}}, y_i^{t+n_{obs}+n_{pred}})]$. That is
 $$ Y_i^t = f(X_i^t \vert c, z) $$
 
-The prediction $Y_i^t$ is controllable by the vector $c$, where consist of $(c_1, c_2, c_3)$. So we can control the factors of obstacles, maps, and semantics respectively. These factors might vary over time.
+The prediction $Y_i^t$ is controllable by the vector $c$, where consist of $(c_1, c_2, c_3)$. So we can control the factors of obstacles, maps, and semantics respectively. These factors are independent of each other. They may vary depending on the data set and time.
