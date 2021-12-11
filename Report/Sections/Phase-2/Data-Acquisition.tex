@@ -7,28 +7,22 @@ The most commonly used datasets for pedestrian trajectory prediction are ETH and
 The BIWI Walking Pedestrians (also named ETH Walking Pedestrians [EWAP]) dataset referred to as ETH \cite[]{ETH-biwi} is the research work of Pellegrini et al. from ETH Zurich University, this dataset is comprised of two scenes (namely eth and hotel) taken from a bird's eye view. In total the dataset has 785 different pedestrians 365 and 420 for eth and hotel respectively. The pedestrian position is annotated at 2.5fps in both datasets that is every 0.4 seconds of a trajectory.Figure \ref{fig:eth-dataset-scenes} represents each scences from the ETH dataset.\newline
 Whereas the UCY dataset \cite[]{UCY-crowds} is the research work of Lerner et al. from the University of Cyprus. The dataset is comprised of three scenes (univ, zara1, and zara2), also taken from a bird's eye view. In total it contains trajectories of more than 1100 pedestrians containing 850, 148, and 204 for univ, zara1, and zara2 respectively. Just like ETH, the UCY dataset is also annotated with pedestrian positions every 0.4 seconds. Figure \ref{fig:crowds-dataset-scenes} represents each scences from the UCY dataset.\newline
 These two datasets are often used in combination: in total, they contain five scenes (eth, hotel, univ, zara1, and zara2), with more than 1800 pedestrian trajectories. For training and testing purposes we use leave-one-out approach: basically, the model is first trained on four scenes and tested on the fifth, and the procedure is repeated five times, once for each scene.\newline 
-The original datasets can be downloaded directly from the official download links (ETH - BIWI Walking Pedestrians dataset)~\footnote{\url{https://data.vision.ee.ethz.ch/cvl/aem/ewap_dataset_full.tgz}}, and (UCY - Crowded Data)~\footnote{\url{https://graphics.cs.ucy.ac.cy/research/downloads/crowd-data}}.
+The original datasets can be downloaded directly from the official download links (ETH - BIWI Walking Pedestrians dataset)~\footnote{\label{fn:eth-dataset}\url{https://data.vision.ee.ethz.ch/cvl/aem/ewap_dataset_full.tgz}}, and (UCY - Crowded Data)~\footnote{\label{fn:ucy-dataset}\url{https://graphics.cs.ucy.ac.cy/research/downloads/crowd-data}}.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.40\linewidth]{./figures/image-biwi.png}
   \includegraphics[width=0.40\linewidth]{./figures/biwi-hotel.png}
-  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
-    Ewing, Inc. [Public domain], via Wikimedia
-    Commons. (\url{https://goo.gl/VLCRBB}).}\label{fig:eth-dataset-scenes}
-  \Description{The 1907 Franklin Model D roadster.}
+  \caption{EWAP~\protect\footnotemark{\ref{fn:eth-dataset}} datasets scenes - left image represents scene from eth, while right from hotel dataset \cite[]{UCY-crowds}}\label{fig:eth-dataset-scenes}
+  \Description{ETH dataset images}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.40\linewidth]{./figures/students_003.jpg}
-  \includegraphics[width=0.40\linewidth]{./figures/crowds_zara01.jpg}
-  \\[\smallskipamount]
-  \includegraphics[width=0.40\linewidth]{./figures/crowds_zara02.jpg}
-  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
-    Ewing, Inc. [Public domain], via Wikimedia
-    Commons. (\url{https://goo.gl/VLCRBB}).}\label{fig:crowds-dataset-scenes}
-  \Description{The 1907 Franklin Model D roadster.}
+  \includegraphics[width=0.40\linewidth]{./figures/crowds_zara01.jpg} % crowds_zara2.jpg is same
+  \caption{UCY~\protect\footnotemark{\ref{fn:ucy-dataset}} datasets scenes - left image represents scene from univ, while right image from zara1 and zara2 dataset \cite[]{ETH-biwi}}\label{fig:crowds-dataset-scenes}
+  \Description{UCY crowds dataset images}
 \end{figure}
 
 \subsection{Data preprocessing}
