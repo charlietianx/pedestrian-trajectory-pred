@@ -26,5 +26,9 @@ The original datasets can be downloaded directly from the official download link
 \end{figure}
 
 \subsection{Data preprocessing}
-
-In our experiments, we use the data parsed by SocialWays directly. For the ETH dataset, the parsing process can be illustrated by the Social Ways project, and for the UCY dataset, the parsing process is currently not included in the project and is not publicly available. But the parsed data is provided by Social Ways and is available for public download~\footnote{\url{http://www.dropbox.com/sh/lh1s41d1pqp8cbx/AAD4sB1JAiZIkCL7LHht-S4Ca}}.
+In this research, we use ETH and UCY datasets for the implementation of InfoGAN based trajectory prediction model. The dataset that is available from ETH is provided in a text file where each line represents frame number in the scene, pedestrian id, pedestrian positions, and velocities in x y z coordinates for the respective frame, the data is formatted as:
+\begin{center}
+  [frame\char`_number pedestrian\char`_ID pos\char`_x pos\char`_z pos\char`_y v\char`_x v\char`_z v\char`_y]
+\end{center}
+The metric used is 'meters' for the positions and velocities. The dataset also includes the homography matrix used to calculate the metric in real-world coordinates. However, pos\char`_z and v\char`_z (direction perpendicular to the ground) are not used. The data from the ETH is enough for the modeling and does not need preprocessing for our research, other Rescaling (min-max normalization).\newline
+The dataset availabe from UCY is however uses different formating, which require preprocessing to format it to ETH dataset. However we consider it to be out of the scope of this research and hence we directly use the UCY data provided by the SocialWays\cite[]{DBLP:journals/corr/ChenDHSSA16} availabe via a publicaly shared Link~\footnote{\url{http://www.dropbox.com/sh/lh1s41d1pqp8cbx/AAD4sB1JAiZIkCL7LHht-S4Ca}} preprocessed to match the ETH dataset format.
