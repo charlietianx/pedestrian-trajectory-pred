@@ -18,12 +18,6 @@ In our case, for pedestrian trajectory data, the generator is trained to generat
 
 \subsubsection{InfoGAN}
 \hfill \\
-Information Maximizing Generative Adversarial Networks (InfoGAN) enable GANs to unsupervised learn disentangled representations by including information-theoretic regularization. It claims that the mutual information between a subset of the generator input (i.e., latent code $c$ decomposed from input $z$) and the generator output should be high. The lower bound of the mutual information $I(c; G(z, c))$ can be obtained as $$I(c; G(z, c)) \geq \mathbb{E}_{c \sim P(c), x \sim G(z, c)} \lbrack \log Q(c | x) \rbrack + H(c)$$, where only $Q(c | x)$ is an active variable and $x$ come from $G(z, c)$.
-
-According to InfoGAN~\cite{infogan}, the additional work compared to GAN includes: $G$ takes the noise variable $z$ and the latent code $c$ as input to generate the sample $G(z, c)$. The additional auxiliary network $Q$ accepts the input $G(z, c)$ and outputs the parameters for $Q(c|G(z, c))$. G and Q are trained to maximize $Q(c | G(z, c))$. So, the min-max game is updated with a regularization: \[\min_{G,Q}\max_{D} \mathbf{V_{InfoGAN}}(D, G, Q) = \mathbf{V}(D, G) - \lambda I(c; G(z, c)) \]
-
-In our work, we added parameterizable categorical latent codes and continuous latent codes to the generator, where the number of latent codes and the dimensionality of each categorical latent code are parameterizable. We implement the auxiliary network Q in a way that it shares all network layers with D except the last layer, and the final network of Q is a multilayer perceptron that accepts the features extracted by the shared network $D_s$, and whose output depends on the distribution of the latent code. The implemented model is shown in Figure\ref{arch}.
-
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/arch.png}
@@ -31,6 +25,13 @@ In our work, we added parameterizable categorical latent codes and continuous la
   \Description{model structure}
   \label{arch}
 \end{figure*}
+Information Maximizing Generative Adversarial Networks (InfoGAN) enable GANs to unsupervised learn disentangled representations by including information-theoretic regularization. It claims that the mutual information between a subset of the generator input (i.e., latent code $c$ decomposed from input $z$) and the generator output should be high. The lower bound of the mutual information $I(c; G(z, c))$ can be obtained as $$I(c; G(z, c)) \geq \mathbb{E}_{c \sim P(c), x \sim G(z, c)} \lbrack \log Q(c | x) \rbrack + H(c)$$, where only $Q(c | x)$ is an active variable and $x$ come from $G(z, c)$.
+
+According to InfoGAN~\cite{infogan}, the additional work compared to GAN includes: $G$ takes the noise variable $z$ and the latent code $c$ as input to generate the sample $G(z, c)$. The additional auxiliary network $Q$ accepts the input $G(z, c)$ and outputs the parameters for $Q(c|G(z, c))$. G and Q are trained to maximize $Q(c | G(z, c))$. So, the min-max game is updated with a regularization: \[\min_{G,Q}\max_{D} \mathbf{V_{InfoGAN}}(D, G, Q) = \mathbf{V}(D, G) - \lambda I(c; G(z, c)) \]
+
+In our work, we added parameterizable categorical latent codes and continuous latent codes to the generator, where the number of latent codes and the dimensionality of each categorical latent code are parameterizable. We implement the auxiliary network Q in a way that it shares all network layers with D except the last layer, and the final network of Q is a multilayer perceptron that accepts the features extracted by the shared network $D_s$, and whose output depends on the distribution of the latent code. The implemented model is shown in Figure\ref{arch}.
+
+
 
 For the categorical latent code, we simply make it conform to the categorical distribution, so the output can be a softmax representation.
 $$Q_{\text{head}}(D_s(G(z, c))) = MLP(D_s(G(z, c)); W_{Q}) = \hat c$$
@@ -67,7 +68,7 @@ $$\text{ADE}_{T} = \frac 1 T \sum_{t=0}^{T} \lVert \langle x^t, y^t \rangle - \l
 \textbf{Final Displacement Error (FDE)}: Euclidean distance between ground truth and the prediction at the final time step.
 $$\text{FDE}_{T} = \lVert \langle x^T, y^T \rangle - \langle \hat x^T, \hat y^T \rangle \lVert_{2}  $$
 
-Consistent with Social GAN~\cite{Gupta_2018_CVPR}, we performed experiments with $T$ equal to 8 or 12, which is also a common choice.
+Consistent with Social GAN~\cite{Gupta_2018_CVPR}, we performed experiments with $T$ equal to $8$ or $12$, which is also a common choice.
 
 
 \subsubsection{Baselines}
