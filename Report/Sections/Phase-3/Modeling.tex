@@ -1,6 +1,6 @@
 \subsection{Methodology}
 
-Our experiments are based on Social GAN by Agrim Gupta et al ~\cite{Gupta_2018_CVPR}. It utilizes generative models to overcome the limitations of previous work. They build an LSTM-based encoder-decoder GAN capable of capturing the multimodality of trajectory prediction. In addition, they propose a novel pooling mechanism that enables the network to learn social norms among humans, and a $k$ variety loss that motivates the network to generate diverse samples.
+Our experiments are based on Social GAN by Agrim Gupta et al~\cite{Gupta_2018_CVPR}. It utilizes generative models to overcome the limitations of previous work. They build an LSTM-based encoder-decoder GAN capable of capturing the multimodality of trajectory prediction. In addition, they propose a novel pooling mechanism that enables the network to learn social norms among humans, and a $k$ variety loss that motivates the network to generate diverse samples.
 
 In the following subsections, we will describe the key methods of our experiments.
 
@@ -29,7 +29,7 @@ Information Maximizing Generative Adversarial Networks (InfoGAN) enable GANs to 
 
 According to InfoGAN~\cite{infogan}, the additional work compared to GAN includes: $G$ takes the noise variable $z$ and the latent code $c$ as input to generate the sample $G(z, c)$. The additional auxiliary network $Q$ accepts the input $G(z, c)$ and outputs the parameters for $Q(c|G(z, c))$. G and Q are trained to maximize $Q(c | G(z, c))$. So, the min-max game is updated with a regularization: \[\min_{G,Q}\max_{D} \mathbf{V_{InfoGAN}}(D, G, Q) = \mathbf{V}(D, G) - \lambda I(c; G(z, c)) \]
 
-In our work, we added parameterizable categorical latent codes and continuous latent codes to the generator, where the number of latent codes and the dimensionality of each categorical latent code are parameterizable. We implement the auxiliary network Q in a way that it shares all network layers with D except the last layer, and the final network of Q is a multilayer perceptron that accepts the features extracted by the shared network $D_s$, and whose output depends on the distribution of the latent code. The implemented model is shown in Figure\ref{arch}.
+In our work, we added parameterizable categorical latent codes and continuous latent codes to the generator, where the number of latent codes and the dimensionality of each categorical latent code are parameterizable. We implement the auxiliary network $Q$ in a way that it shares all network layers with $D$ except the last layer, and the final network of $Q$ is a multilayer perceptron that accepts the features extracted by the shared network $D_s$, and whose output depends on the distribution of the latent code. The implemented model is shown in Figure~\ref{arch}.
 
 
 
@@ -53,8 +53,16 @@ $$\mathcal{L}_{\text{cont}} (c, Q(G(z, c))) = NLL(c, Q(G(z, c))) $$
 
 The categorical latent code loss and the continuous latent code loss can be scaled by the hyperparameters $\lambda_{disc}$ and $\lambda_{cont}$, respectively.
 
+\subsubsection{Regularization}
+\hfill \\
+To constrain the independence of each code, we added a regularization. We claim that the variation of generated sample contributed by one code should be orthogonal with the variation contributed by code another code. That is, for $c_1, c_2$, we have
+  $$ (\frac {G(c_1 + \epsilon, c_2) - G(c_1, c_2, c_3)} {\epsilon})^T (\frac {G(c_1, c_2 + \epsilon, c_3) - G(c_1, c_2)} {\epsilon}) = 0$$
+We use the encoder in generator to get the embedding of the trajectory and claim that the variation between embeddings should be orthogonal.
+
+
 \subsection{Experimental Setup}
 The first goal of our experiment is not to deteriorate the original SocialGAN network. Because we just added some latent codes to the original network, we did not reduce the dimensionality of the noise vectors or make any other changes. The second goal is to disentangle some factors with our implementation of InfoGAN, which is also the main goal of our experiments. To achieve these goals, we introduced the following metrics, baselines, and measures of the disentanglement.
+
 
 
 \subsubsection{Evaluation Metrics}
@@ -85,7 +93,7 @@ To measure the disentanglement of our implementation of InfoGAN, we utilized lat
 
 \begin{itemize}
   \item For categorical latent codes with $d$ categories, the traversal is over $d$ categorical latent variables representing each category.
-  \item For a continuous latent code, the traversal is over range (-2,2). We perform linear interpolation to get 10 points between (-2, 2), which can be the common values of the latent code that conforms to distribution $\mathcal{N}(0, 1)$.
+  \item For a continuous latent code, the traversal is over range $(-2, 2)$. We perform linear interpolation to get 10 points between $(-2, 2)$, which can be the common values of the latent code that conforms to distribution $\mathcal{N}(0, 1)$.
 \end{itemize}
 
 We inspect the latent traversal for $N$ samples. We expect to find some common patterns of variations in a single latent codes, which means that the code is disentangled and encode with semantic meaning.
