@@ -12,9 +12,7 @@ According to the research of Generative Adversarial Nets~\cite{gan}: a Generativ
   \min_{G} \max_{D} V(G, D) = \mathbb{E}_{x \sim p_{\text{data}(x)}} \lbrack \log(D(x))\rbrack \\ + \mathbb{E}_{z \sim p_{z}(z)} \lbrack \log(1 - D(G(z))) \rbrack
 \end{multline}
 
-
 In our case, for pedestrian trajectory data, the generator is trained to generate possible future trajectories that have a distribution similar to the training data, given certain previously observed trajectories, while the discriminator learns to distinguish the rationality of the generated paths. These two networks are trained simultaneously. As the discriminators are learned, the generators are improved.
-
 
 \subsubsection{InfoGAN}
 \hfill \\
@@ -52,7 +50,7 @@ The categorical latent code loss and the continuous latent code loss can be scal
 
 \subsubsection{Regularization}
 \hfill \\
-To constrain the independence of each code, we added a regularization. We claim that the variation of generated sample contributed by one code should be orthogonal with the variation contributed by code another code. That is, for $c_1, c_2$, we have
+To constrain the independence of each code, we added a regularization. We claim that the variation of generated sample contributed by one code should be orthogonal with the variation contributed by code another code. That is, for $c_1, c_2$, we have:
   $$ (\frac {G(c_1 + \delta, c_2) - G(c_1, c_2, c_3)} {\delta})^T (\frac {G(c_1, c_2 + \delta, c_3) - G(c_1, c_2)} {\delta}) = 0$$
 We use the encoder in generator to get the embedding of the trajectory and claim that the variation between embeddings should be orthogonal.
 
