@@ -1,5 +1,7 @@
 \documentclass[sigconf]{acmart}
 \usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{tabularx}
 \settopmatter{printacmref=false}
 
 %% remove copyright and further ACM refs for the Lab
@@ -60,17 +62,15 @@
 \section{Data Acquisition \& Pre-Processing}
 \input{Sections/Phase-2/Data-Acquisition.tex}
 
-% Phase - 3
-% (uncomment below two lines for your work and use the specific file to add material)
+
 \section{Modeling}
 \input{Sections/Phase-3/Modeling.tex}
 
 % Phase - 4
 % (uncomment below two lines for your work and use the specific file to add material)
-% \section*{Evaluation}
-% \input{Sections/Phase-4/Evalution.tex}
+\section{Evaluation}
+\input{Sections/Phase-4/Evalution.tex}
 
-\clearpage
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
@@ -80,6 +80,5 @@
 %%
 %% If your work has an appendix, this is the place to put it.
 \appendix
-
 
 \end{document}
