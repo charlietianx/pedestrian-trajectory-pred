@@ -1,6 +1,7 @@
 \subsection{Results}
 
 In this section, we show the results of our experiments. We first show the base overview of ADE/FDE compared with baseline SGAN-20V-20.
+
 \subsubsection{Impact of InfoGAN}
 
 \begin{table}[ht]
@@ -30,7 +31,7 @@ In this section, we show the results of our experiments. We first show the base 
 \begin{figure}[b]
   \centering
   \includegraphics[width=0.3\textwidth]{figures/disc_interpolations_code0_batch2.jpeg}
-  \caption{latent traversals of three dimensional categorical code for model UNIV\_12}{The x-axis is the traversals of three dimensions, The y-axis is the different samples. The black dots show the observed trajectory, the green dots show the ground true of the next 12 steps trajectory, the red dots show the prediction of our model}
+  \caption{Latent traversals of three dimensional categorical code for model UNIV\_12. \normalfont{The x-axis is the traversals of three dimensions, The y-axis is the different samples. The black dots show the observed trajectory, the green dots show the ground true of the next 12 steps trajectory, the red dots show the prediction of our model.}}{Categorical latent code shows some kinds of consistent but not always(e.g. the second dimensions). More importantly, It is vary hard to  interpret the semantic meaning of the code (e.g. it is difficult to relate changes in all three dimensions to any factor.).}
   \Description{latent traversals disc code}
   \label{disc_code}
 \end{figure}
@@ -38,17 +39,16 @@ In this section, we show the results of our experiments. We first show the base 
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/cont_interpolations_code0_batch2.jpeg}
-  \caption{latent traversals of the continuous latent code for model UNIV\_12}{The x-axis is the traversals of range $(-2, 2)$, The y-axis is the different samples. The black dots show the observed trajectory, the green dots show the ground true of the next 12 steps trajectory, the red dots show the prediction of our model}
+  \caption{Latent traversals of the continuous latent code for model UNIV\_12. \normalfont{The x-axis is the traversals of range $(-2, 2)$, The y-axis is the different samples. The black dots show the observed trajectory, the green dots show the ground true of the next 12 steps trajectory, the red dots show the prediction of our model.}}{Increasing the code from -2 to 2, the trajectory seems to move downwards. However, this is not always the case, for example the change is not so obvious for the $5^{\text{th}}$ and $6^{\text{th}}$ samples.}
   \Description{latent traversals disc code}
   \label{cont_code}
 \end{figure*}
 
 We first evaluate the performance of the modified model and compare it with other models. Table~\ref{table:adefde} shows the results of our modified model under one categorical latent code and one continuous latent codes. We trained our model with the following hyperparameters: one categorical latent code with three dimensions, one continuous latent code, the weight of infomation loss range from $0.03$ to $0.1$. The other hyperparameters are the same as the hyperparameters of SGAN model we trained. It can be seen that our results are slightly better than the SGAN model. This may be due to the fact that the additional InfoGAN slightly helps to structure the latent space.
 
-
 To observe the performance of untangling, we plotted the latent traversal for different samples. Figure~\ref{disc_code} shows the latent traversal of the categorical latent code. It is noted that the interpretation of the discrete codes is difficult. This is not surprising, probably because it is not easy to describe categorical information in a two-dimensional coordinate space.
 
-Figure~\ref{cont_code} shows the traversals of the continuous code. It can be seen that there is a roughly consistent variation in the continuous latent codes across most of the samples. (e.g. move the trajectory to downwards. But that is not always the case, with the code increase, the direction of the trajectory slightly change). We must point out that the information loss for the continuous code cannot decrease to a low level, as shown in Figure. This indicates that the information between the latent code and the generated samples has not been maximized, so the latent space is still entangled. This might also explains the fact that our InfoGAN has only a slight improvement in ADE/FDE.
+Figure~\ref{cont_code} shows the traversals of the continuous code. It can be seen that there is a roughly consistent variation in the continuous latent codes across most of the samples. (e.g. moving the trajectory to downwards, but that is not always the case. With the code increase, the direction of the trajectory slightly change). We must point out that the information loss for the continuous code cannot decrease to a low level, as shown in Figure. This indicates that the information between the latent code and the generated samples has not been maximized, so the latent space is still entangled. This might also explains the fact that our InfoGAN has only a slight improvement in ADE/FDE.
 
 
 In addition, we point out that the InfoGAN we added to SGAN is hard to train. Unlike the information loss that decreases quickly as mentioned in the InfoGAN, the information loss of continuous code may not change for some information loss weights. We found that for continuous codes, the infomation loss weight that enables the loss decrease and relatively fast learning  range from $0.03$ to $0.1$. A cosine annealing schedule (with restart) for information loss weights may be helpful.
@@ -56,14 +56,13 @@ In addition, we point out that the InfoGAN we added to SGAN is hard to train. Un
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/cont_interpolations_code0_batch2.jpeg}
-  \caption{latent traversals of the continuous latent code 0 for model UNIV\_12 with regularization}
+  \caption{Latent traversals of the continuous latent code 0 for model UNIV\_12 with regularization. \normalfont{The plot style follows Figure \ref{cont_code} (i.e. the meaning of x-axis, y-axis and colors). }}
   \Description{latent traversals cont code 0}
   \label{cont_code_0}
-\end{figure*}
-\begin{figure*}[t]
-  \centering
+
   \includegraphics[width=0.7\textwidth]{figures/reg_cont_interpolations_code1_batch1.jpeg}
-  \caption{latent traversals of the continuous latent code 1 for model UNIV\_12 with regularization}
+  \caption{Latent traversals of the continuous latent code 1 for model UNIV\_12 with regularization. \normalfont{The plot style follows Figure \ref{cont_code} (i.e. the meaning of x-axis, y-axis and colors). }}
+  {The change induced by code 1 is not so consistent. }
   \Description{latent traversals cont code 1}
   \label{cont_code_1}
 \end{figure*}
@@ -76,4 +75,4 @@ To disentangle the latent space, we add a regularization constraint that the gen
 In addition, we found that adding this regularization reduces the learning time of InfoGAN (information loss can be reduced faster). However, it increases the learning time of SGAN (SGAN loss is reduced slower than before). We found that to get the same performance as before, we need to train for a longer time. But with longer time, we may get better performance than before, while before, longer training time does not increase performance.
 
 \subsection{Conclusion}
-To build a controllable generative model to predict trajectories, we added InfoGAN to the Social GAN model. We show that InfoGAN can actually disentangle the latent space, but that is not always the case. This may be an open question, and we have not investigated it in our study. One guess could be that there is not enough signal in the dataset. Futher, we added orthogonality constraints on the sample variation induced by different codes. Although it did help in our case, this approach may be applicable to latent code disentanglement in other tasks (e.g., image generation) and needs to be explored. Finally, there are many ways to constrain the changes caused by the latent codes and then distinguish the factor that affects the human motion trajectory. In future work, we can explore other ways to constrain the changes in the two codes so that they are not related.
+To build a controllable generative model to predict trajectories, we added InfoGAN to the Social GAN model. We show that InfoGAN can actually disentangle the latent space, but that is not always the case. This may be an open question, and we have not investigated it in our study. One guess could be that there is not enough signal in the dataset. Futher, we added orthogonality constraints on the sample variation induced by different codes. Although it did help in our case, this approach may be applicable to latent code disentanglement in other tasks (e.g., image generation) and needs to be explored. Finally, there are many ways to constrain the changes caused by the latent codes and then distinguish the factor that affects the human motion trajectory. In future work, we can explore other ways to constrain the changes of the two codes to make them unrelated.
